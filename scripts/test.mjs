@@ -992,9 +992,9 @@ test('public documentation states telemetry defaults, network boundaries, and ex
   assert.match(byName['README.md'], /HYPERFRAMES_NO_TELEMETRY=1/u);
   assert.match(byName['README.md'], /npm registry/u);
   assert.match(byName['README.md'], /GitHub/u);
-  assert.match(byName['README.md'], /HyperFrames 浏览器源/u);
+  assert.match(byName['README.md'], /HyperFrames (?:官方)?浏览器源/u);
   assert.match(byName['README.md'], /本机/u);
-  assert.match(byName['README.md'], /外部 HyperFrames[^。\n]*自身/u);
+  assert.match(byName['README.md'], /(?:外部 HyperFrames|发行包之外直接调用 HyperFrames)[^。\n]*自身/u);
 
   const implementationBoundary = [
     byName['PRIVACY.md'],
@@ -1051,7 +1051,7 @@ test('v1 public benchmark preserves measured facts, metric scopes, and unfinishe
   assert.match(readme, /179\.866/u);
   assert.match(readme, /242\.05/u);
   assert.match(readme, /宿主 Token 未知/u);
-  assert.match(readme, /不把旧版耗时当成新版成绩/u);
+  assert.match(readme, /尚未证明[^。\n]*省时间或 Token/u);
   assert.match(changelog, /docs\/V1\.0\.0-BENCHMARK\.md/u);
   assert.match(changelog, /用户没有观看或审美批准[^\n]*`skipped`/u);
   assert.match(support, /Codex measured \/ Claude pending/u);
@@ -1077,11 +1077,12 @@ test('public runtime claims expose independent Builder backends and deterministi
   const support = await readFile(path.join(root, 'SUPPORT-MATRIX.md'), 'utf8');
   const checklist = await readFile(path.join(root, 'RELEASE-CHECKLIST.md'), 'utf8');
   const legacy = await readFile(path.join(root, 'erduo-broll-loop-engineering', 'references', 'legacy-production.md'), 'utf8');
-  assert.match(readme, /新轻量流程先支持 HyperFrames，不自动迁移或切换后端/u);
+  assert.match(readme, /v1\.1\.0 新流程先支持固定版本 HyperFrames/u);
+  assert.match(readme, /不自动迁移/u);
   assert.match(readme, /独立导演/u);
   assert.match(readme, /独立审美/u);
   assert.match(readme, /`broll-plan\.json`/u);
-  assert.match(readme, /152 张 Shotcraft 卡[^。\n]*不是 152 个已经验证的 HyperFrames 动画组件/u);
+  assert.match(readme, /152 张卡片不等于 152 个已经渲染验证的 HyperFrames 组件/u);
   assert.match(legacy, /production default: `hyperframes`/u);
   assert.match(legacy, /Remotion: explicit opt-in or canary only/u);
   assert.match(legacy, /`auto`: experimental and explicit only/u);
@@ -4036,6 +4037,7 @@ test('entire public release tree has no private path, original-author, private-s
   }
   const expectedSourceFiles = [
     'CHANGELOG.md',
+    'README.md',
     'RELEASE-CHECKLIST.md',
     'SUPPORT-MATRIX.md',
     'THIRD-PARTY-NOTICES.md',
@@ -4802,17 +4804,17 @@ test('runtime lock pins the complete HyperFrames and Skills CLI graph with integ
       .map((name) => readFile(path.join(root, name), 'utf8')),
   );
   assert.doesNotThrow(() => validateRuntimeLock(packageJson, lock));
-  assert.equal(RELEASE_VERSION, '1.0.1');
+  assert.equal(RELEASE_VERSION, '1.1.0');
   assert.equal(publicPackage.version, RELEASE_VERSION);
   assert.equal(packageJson.version, RELEASE_VERSION);
   assert.equal(lock.version, RELEASE_VERSION);
   assert.equal(lock.packages[''].version, RELEASE_VERSION);
-  assert.match(readme, /github\.com\/erduo1998-cell\/erduo-broll-loop-engineering\/releases\/tag\/v1\.0\.1/u);
+  assert.match(readme, /github\.com\/erduo1998-cell\/erduo-broll-loop-engineering\/releases\/tag\/v1\.1\.0/u);
   assert.match(changelog, /## 0\.9\.2 —/u);
   assert.match(support, /`0\.9\.2`/u);
   assert.match(checklist, /`1\.0\.0`/u);
   for (const translatedReadme of translatedReadmes) {
-    assert.match(translatedReadme, /releases\/tag\/v1\.0\.1/u);
+    assert.match(translatedReadme, /releases\/tag\/v1\.1\.0/u);
     assert.match(translatedReadme, /references\/lean-production\.md/u);
     assert.match(translatedReadme, /references\/legacy-production\.md/u);
     assert.match(translatedReadme, /scripts\/doctor\.mjs/u);

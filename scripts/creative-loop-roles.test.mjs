@@ -122,14 +122,14 @@ test('current public docs distinguish lean defaults from v1.0.1 history', async 
   const legacy = await readSkill('references/legacy-production.md');
   const benchmark = await readFile(path.join(repoRoot, 'docs', 'V1.0.0-BENCHMARK.md'), 'utf8');
 
-  assert.match(readme, /质量优先的角色接力流程/u);
+  assert.match(readme, /质量优先[^\n]*接力流程/u);
   assert.match(readme, /`broll-plan\.json`/u);
   assert.match(readme, /独立导演/u);
   assert.match(readme, /独立审美/u);
-  assert.match(readme, /v1\.0\.1 兼容流程/u);
+  assert.match(readme, /v1\.0\.1[\s\S]*兼容流程/u);
   assert.match(readme, /179\.866/u);
   assert.match(readme, /242\.05/u);
-  assert.match(readme, /不能视为完整长片验收/u);
+  assert.match(readme, /(?:不能视为|不冒充)完整长片验收/u);
   assert.match(legacy, /five-shot creative canary/u);
   assert.match(legacy, /production default: `hyperframes`/u);
   assert.match(benchmark, /179\.866/u);

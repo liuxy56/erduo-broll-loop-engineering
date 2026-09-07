@@ -1,3 +1,5 @@
+> この作業ツリーには未リリースの軽量 HyperFrames フローが含まれます。制作者が直接担当し、計画を一本化、低コストのプレビューとショット単位の修正を行います。以下の v1.0.1 は既存の公開版です。[新フロー](erduo-broll-loop-engineering/references/lean-production.md)。
+
 <div align="center">
 
 # Erduo B-roll Loop Engineering

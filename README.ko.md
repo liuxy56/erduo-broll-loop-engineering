@@ -1,3 +1,5 @@
+> 현재 작업 트리에는 아직 출시되지 않은 경량 HyperFrames 흐름이 포함됩니다. 제작자가 직접 작업하고 하나의 계획, 빠른 미리보기, 장면별 수정으로 진행합니다. 아래 v1.0.1은 기존 공개 버전입니다. [새 흐름](erduo-broll-loop-engineering/references/lean-production.md).
+
 <div align="center">
 
 # Erduo B-roll Loop Engineering

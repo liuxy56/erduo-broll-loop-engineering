@@ -57,8 +57,8 @@ test('generated role prompts anchor positive craft and chapter creative ownershi
   assert.match(builder, /open every six-frame sheet and the chapter preview/u);
 });
 
-test('Parent, orchestration, and stage Skills expose the reset contract', async () => {
-  const parent = await readSkill('SKILL.md');
+test('Legacy production and stage Skills preserve the v1.0.1 reset contract', async () => {
+  const parent = await readSkill('references/legacy-production.md');
   const orchestration = await readSkill('references/stage-orchestration.md');
   const director = await readSkill('stages/broll-director/SKILL.md');
   const assets = await readSkill('stages/broll-assets/SKILL.md');
@@ -117,23 +117,25 @@ test('documented Recipe v4 Planner commands include every direct creative input'
   }
 });
 
-test('public v1.0.1 docs disclose the approved canary scope and previous visual failure', async () => {
-  const readmes = await Promise.all([
-    'README.md', 'README.en.md', 'README.ja.md', 'README.ko.md', 'README.zh-TW.md',
-  ].map(async (file) => [file, await readFile(path.join(repoRoot, file), 'utf8')]));
+test('current public docs distinguish lean defaults from v1.0.1 history', async () => {
+  const readme = await readFile(path.join(repoRoot, 'README.md'), 'utf8');
+  const legacy = await readSkill('references/legacy-production.md');
+  const benchmark = await readFile(path.join(repoRoot, 'docs', 'V1.0.0-BENCHMARK.md'), 'utf8');
 
-  for (const [name, text] of readmes) {
-    for (const token of ['Chapter Builder', '5–8', 'truth', 'creativeProposal', 'HyperFrames', 'Remotion', 'auto', 'accepted', 'revised']) {
-      assert.equal(text.includes(token), true, `${name}: ${token}`);
-    }
-    assert.match(text, /five-shot|5-shot|5 镜头|5 ショット|5개 shot|5 鏡/u, `${name}: canary count`);
-    assert.match(text, /v1\.0\.1/u, name);
-    assert.match(text, /179\.866/u, name);
-    assert.match(text, /visual|視覚|시각|視覺/u, name);
-    assert.doesNotMatch(text, privatePathPattern, name);
-  }
+  assert.match(readme, /尚未发布的轻量流程/u);
+  assert.match(readme, /`broll-plan\.json`/u);
+  assert.match(readme, /不再固定启动 Director、Assets、Lead 和多个 Builder/u);
+  assert.match(readme, /v1\.0\.1 兼容流程/u);
+  assert.match(readme, /179\.866/u);
+  assert.match(readme, /242\.05/u);
+  assert.match(readme, /不能视为完整长片验收/u);
+  assert.match(legacy, /five-shot creative canary/u);
+  assert.match(legacy, /production default: `hyperframes`/u);
+  assert.match(benchmark, /179\.866/u);
+  assert.match(benchmark, /visual lock 状态是 `skipped`/u);
+  assert.doesNotMatch([readme, legacy, benchmark].join('\n'), privatePathPattern);
 
-  const changelog = await readFile(path.join(repoRoot, 'CHANGELOG.md'), 'utf8');
+ const changelog = await readFile(path.join(repoRoot, 'CHANGELOG.md'), 'utf8');
   const support = await readFile(path.join(repoRoot, 'SUPPORT-MATRIX.md'), 'utf8');
   const checklist = await readFile(path.join(repoRoot, 'RELEASE-CHECKLIST.md'), 'utf8');
   assert.match(changelog, /5 镜头 creative canary/u);

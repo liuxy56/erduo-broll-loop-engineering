@@ -1,3 +1,5 @@
+> This working tree includes an unreleased lean HyperFrames workflow: direct creator ownership, one plan, quick drafts, and per-shot revisions. The v1.0.1 workflow below remains the released legacy route. See [current workflow](erduo-broll-loop-engineering/references/lean-production.md).
+
 <div align="center">
 
 # Erduo B-roll Loop Engineering

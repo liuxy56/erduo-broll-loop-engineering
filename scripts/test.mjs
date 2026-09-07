@@ -987,27 +987,33 @@ test('public documentation states telemetry defaults, network boundaries, and ex
     name,
     text: await readFile(path.join(root, name), 'utf8'),
   })));
-  for (const { name, text } of documents) {
-    assert.match(text, /本仓库自身[^。\n]*遥测/u, name);
-    assert.match(text, /HYPERFRAMES_NO_TELEMETRY=1/u, name);
-    assert.match(text, /npm registry/u, name);
-    assert.match(text, /GitHub[^。\n]*官方 Skill/u, name);
-    assert.match(text, /browser ensure/u, name);
-    assert.match(text, /官方浏览器源/u, name);
-    assert.match(text, /包外|发行包之外/u, name);
-    assert.match(text, /HyperFrames 自身[^。\n]*政策约束/u, name);
-  }
+  const byName = Object.fromEntries(documents.map(({ name, text }) => [name, text]));
+  assert.match(byName['README.md'], /不采集或发送遥测/u);
+  assert.match(byName['README.md'], /HYPERFRAMES_NO_TELEMETRY=1/u);
+  assert.match(byName['README.md'], /npm registry/u);
+  assert.match(byName['README.md'], /GitHub/u);
+  assert.match(byName['README.md'], /HyperFrames 浏览器源/u);
+  assert.match(byName['README.md'], /本机/u);
+  assert.match(byName['README.md'], /外部 HyperFrames[^。\n]*自身/u);
+
+  const implementationBoundary = [
+    byName['PRIVACY.md'],
+    byName['THIRD-PARTY-NOTICES.md'],
+    byName['RELEASE-CHECKLIST.md'],
+  ].join('\n');
+  assert.match(implementationBoundary, /本仓库自身[^。\n]*遥测/u);
+  assert.match(implementationBoundary, /HYPERFRAMES_NO_TELEMETRY=1/u);
+  assert.match(implementationBoundary, /npm registry/u);
+  assert.match(implementationBoundary, /GitHub[^。\n]*官方 Skill/u);
+  assert.match(implementationBoundary, /browser ensure/u);
+  assert.match(implementationBoundary, /官方浏览器源/u);
+  assert.match(implementationBoundary, /包外|发行包之外/u);
+  assert.match(implementationBoundary, /HyperFrames 自身[^。\n]*政策约束/u);
 });
 
 test('v1 public benchmark preserves measured facts, metric scopes, and unfinished gates', async () => {
   const benchmark = await readFile(path.join(root, 'docs', 'V1.0.0-BENCHMARK.md'), 'utf8');
-  const readmes = await Promise.all([
-    'README.md',
-    'README.en.md',
-    'README.ja.md',
-    'README.ko.md',
-    'README.zh-TW.md',
-  ].map((name) => readFile(path.join(root, name), 'utf8')));
+  const readme = await readFile(path.join(root, 'README.md'), 'utf8');
   const changelog = await readFile(path.join(root, 'CHANGELOG.md'), 'utf8');
   const support = await readFile(path.join(root, 'SUPPORT-MATRIX.md'), 'utf8');
   const checklist = await readFile(path.join(root, 'RELEASE-CHECKLIST.md'), 'utf8');
@@ -1041,13 +1047,11 @@ test('v1 public benchmark preserves measured facts, metric scopes, and unfinishe
     [':\\','Users','\\'].join(''),
   ]) assert.equal(benchmark.includes(privatePathMarker), false);
 
-  for (const readme of readmes) {
-    assert.match(readme, /docs\/V1\.0\.0-BENCHMARK\.md/u);
-    assert.match(readme, /242\.05/u);
-    assert.match(readme, /62\.90/u);
-    assert.match(readme, /skipped/u);
-    assert.match(readme, /Claude Code[^\n]*pending/u);
-  }
+  assert.match(readme, /docs\/V1\.0\.0-BENCHMARK\.md/u);
+  assert.match(readme, /179\.866/u);
+  assert.match(readme, /242\.05/u);
+  assert.match(readme, /宿主 Token 未知/u);
+  assert.match(readme, /不把旧版耗时当成新版成绩/u);
   assert.match(changelog, /docs\/V1\.0\.0-BENCHMARK\.md/u);
   assert.match(changelog, /用户没有观看或审美批准[^\n]*`skipped`/u);
   assert.match(support, /Codex measured \/ Claude pending/u);
@@ -1072,31 +1076,24 @@ test('public runtime claims expose independent Builder backends and deterministi
   const readme = await readFile(path.join(root, 'README.md'), 'utf8');
   const support = await readFile(path.join(root, 'SUPPORT-MATRIX.md'), 'utf8');
   const checklist = await readFile(path.join(root, 'RELEASE-CHECKLIST.md'), 'utf8');
-  assert.match(readme, /生产默认使用 HyperFrames/u);
-  assert.match(readme, /`auto` 为实验模式，必须显式选择/u);
-  assert.match(readme, /HyperFrames Chapter Builder 负责每章 5–8 镜的完整创作与交付/u);
-  assert.match(readme, /最终脚本只拼接统一规格/u);
-  assert.match(readme, /不再启动 Runtime Planner、Integrator 或 Render Agent/u);
-  assert.match(readme, /最高 1080p[^。\n]*veryfast \/ CRF 22/u);
-  assert.match(readme, /--plan[^。\n]*--narrative-envelope[^。\n]*--visual-system[^。\n]*--contract/u);
-  assert.match(readme, /medium \/ CRF 16[^。\n]*Master/u);
-  assert.match(readme, /绝不复制预览文件/u);
-  assert.match(readme, /不会把 Remotion 加入共享 runtime 或全局安装/u);
-  assert.match(readme, /现有项目按真实特征判断/u);
-  assert.match(readme, /hybrid[^。\n]*冻结区块媒体/u);
-  assert.match(readme, /152 张卡片不等于 152 个已经渲染验证的 HyperFrames 组件/u);
+  const legacy = await readFile(path.join(root, 'erduo-broll-loop-engineering', 'references', 'legacy-production.md'), 'utf8');
+  assert.match(readme, /新轻量流程先支持 HyperFrames，不自动迁移或切换后端/u);
+  assert.match(readme, /不再固定启动 Director、Assets、Lead 和多个 Builder/u);
+  assert.match(readme, /`broll-plan\.json`/u);
+  assert.match(readme, /152 张 Shotcraft 卡[^。\n]*不是 152 个已经验证的 HyperFrames 动画组件/u);
+  assert.match(legacy, /production default: `hyperframes`/u);
+  assert.match(legacy, /Remotion: explicit opt-in or canary only/u);
+  assert.match(legacy, /`auto`: experimental and explicit only/u);
+  assert.match(legacy, /semantic shot and final media boundaries\s+remain one shot/u);
   assert.match(support, /Remotion runtime \| explicit opt-in \/ canary \/ technical witness only/u);
   assert.match(support, /新 production 不默认选择 Remotion[^\n]*不能称为与 HyperFrames 同等验证/u);
-  assert.match(support, /不全局安装 Remotion/u);
-  assert.match(support, /最高 1080p[^\n]*veryfast \/ CRF 22/u);
-  assert.match(support, /deliver[^\n]*--plan[^\n]*--narrative-envelope[^\n]*--visual-system[^\n]*--contract/u);
   assert.match(checklist, /preview identity[\s\S]{0,500}Runtime Plan v4[\s\S]{0,500}shot contracts[\s\S]{0,200}hashes/u);
   assert.match(checklist, /没有复制、重命名或复用 preview 文件作为 Master/u);
   assert.match(checklist, /缺失、重复、不属于 plan、内容漂移或片段 hash 漂移/u);
   assert.match(checklist, /CLI 输入顺序不作为身份[^\n]*按 plan 的实际顺序装配/u);
   assert.match(checklist, /Remotion/u);
 
-  for (const [name, text] of [['README.md', readme], ['SUPPORT-MATRIX.md', support]]) {
+  for (const [name, text] of [['README.md', readme], ['SUPPORT-MATRIX.md', support], ['legacy-production.md', legacy]]) {
     assert.doesNotMatch(text, /(?:已完成|支持)(?:任意|全部|所有)[^。\n]*(?:Remotion|双端)[^。\n]*(?:转换|渲染)/u, name);
     assert.doesNotMatch(text, /(?:Remotion|双端)[^。\n]*(?:完全一致|全自动转换已完成|生产可用已验证)/u, name);
   }
@@ -1154,12 +1151,13 @@ test('v1 workflow documents use the real Parent script contract and isolate lega
   for (const [name, text] of Object.entries(documents)) {
     assert.doesNotMatch(text, /plan-runtime\.mjs[\s\\]*[\s\S]{0,500}--json/u, name);
   }
-  for (const file of ['README.md', 'README.en.md', 'README.ja.md', 'README.ko.md', 'README.zh-TW.md']) {
-    const text = await readFile(path.join(root, file), 'utf8');
-    assert.match(text, /create-production-profile\.mjs/u, file);
-    assert.match(text, /plan-runtime\.mjs --production-profile/u, file);
-    assert.match(text, /1080[^\n]*1920[^\n]*25/u, file);
-  }
+  const readme = await readFile(path.join(root, 'README.md'), 'utf8');
+  const leanProduction = await readFile(path.join(root, 'erduo-broll-loop-engineering', 'references', 'lean-production.md'), 'utf8');
+  assert.match(readme, /精简制作契约与命令/u);
+  assert.match(readme, /v1\.0\.1 兼容流程/u);
+  assert.match(leanProduction, /node scripts\/lean-plan\.mjs --project/u);
+  assert.match(leanProduction, /node scripts\/lean-render\.mjs --project[\s\S]*--quality draft/u);
+  assert.match(leanProduction, /node scripts\/lean-render\.mjs --project[\s\S]*--quality final/u);
 });
 
 test('runtime router chooses explicit/default routes and stops on mixed project evidence', async (t) => {
@@ -1530,12 +1528,8 @@ test('Shotcraft query keeps discovery concise and loads only an explicitly selec
 
 test('Shotcraft is a problem-triggered reference, never a per-shot creativity gate', async () => {
   const promptPaths = [
-    'erduo-broll-loop-engineering/SKILL.md',
-    'erduo-broll-loop-engineering/stages/broll-director/SKILL.md',
-    'erduo-broll-loop-engineering/references/animation-craft.md',
-    'erduo-broll-loop-engineering/references/prompt-first-workflow.md',
-    'erduo-broll-loop-engineering/references/stage-orchestration.md',
-    'erduo-broll-loop-engineering/references/parent-review-checklist.md',
+    'erduo-broll-loop-engineering/references/legacy-production.md',
+    'erduo-broll-loop-engineering/references/lean-visual-direction.md',
   ];
   const prompts = (await Promise.all(promptPaths.map(async (relative) => ({
     relative,
@@ -4041,7 +4035,6 @@ test('entire public release tree has no private path, original-author, private-s
   }
   const expectedSourceFiles = [
     'CHANGELOG.md',
-    'README.md',
     'RELEASE-CHECKLIST.md',
     'SUPPORT-MATRIX.md',
     'THIRD-PARTY-NOTICES.md',
@@ -4813,7 +4806,7 @@ test('runtime lock pins the complete HyperFrames and Skills CLI graph with integ
   assert.equal(packageJson.version, RELEASE_VERSION);
   assert.equal(lock.version, RELEASE_VERSION);
   assert.equal(lock.packages[''].version, RELEASE_VERSION);
-  assert.match(readme, /version-1\.0\.1-/u);
+  assert.match(readme, /github\.com\/erduo1998-cell\/erduo-broll-loop-engineering\/releases\/tag\/v1\.0\.1/u);
   assert.match(changelog, /## 0\.9\.2 —/u);
   assert.match(support, /`0\.9\.2`/u);
   assert.match(checklist, /`1\.0\.0`/u);

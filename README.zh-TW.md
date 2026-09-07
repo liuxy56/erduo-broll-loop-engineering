@@ -1,3 +1,5 @@
+> 目前工作樹包含尚未發佈的 HyperFrames 輕量流程：創作者直接製作、一份計畫、快速預覽及局部修改。下文 v1.0.1 仍是已發佈的相容流程。參見[目前製作流程](erduo-broll-loop-engineering/references/lean-production.md)。
+
 <div align="center">
 
 # Erduo B-roll Loop Engineering

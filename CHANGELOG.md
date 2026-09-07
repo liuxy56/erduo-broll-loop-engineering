@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased — lean HyperFrames production
+
+- 新任务由创作负责人直接完成设计、制作、观看和返修；共享素材人员按需加入，日常不再固定走三类 Lead 样片与五镜比较。
+- 一份 `broll-plan.json` 保留原始 SRT/design 与镜头含义；脚本处理时间、媒体事实和顺序。
+- 实际对象优先使用可识别素材；SVG 用于清楚的图表、标注和遮罩，避免抽象手绘替代主体。
+- 新增 draft/final 分离、逐镜复用与变化后预览更新；旧 Recipe/runtime-plan 项目和 Remotion 保持显式兼容。
+- 新版收益以本次实际测试为准，不将文件字节统计冒充宿主 Token，未发布新版本或覆盖全局安装。
+
 本项目遵循 Semantic Versioning。稳定版本冻结公开的 Skill、目录、查询与发布包契约；运行时支持等级仍以支持矩阵的实际证据为准。
 
 ## Unreleased

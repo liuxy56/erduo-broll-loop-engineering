@@ -30,8 +30,9 @@
     "test:motion-layout": "node --test scripts/motion-layout-lint.test.mjs",
     "test:remotion-trace": "node --test scripts/remotion-dom-trace.e2e.test.mjs",
     "test:remotion-canary": "node --test scripts/remotion-canary.e2e.test.mjs",
-    "test": "node --test --test-concurrency=1 scripts/test.mjs scripts/creative-loop-delivery.test.mjs scripts/creative-loop-planner.test.mjs scripts/creative-loop-roles.test.mjs scripts/metrics-media.test.mjs scripts/motion-layout-lint.test.mjs scripts/remotion-dom-trace.e2e.test.mjs scripts/remotion-canary.e2e.test.mjs scripts/role-motion-map.test.mjs scripts/shot-native-delivery.test.mjs scripts/v1-planner-visual-lock.test.mjs scripts/lean-plan.test.mjs scripts/lean-render.test.mjs",
+    "test": "node --test --test-concurrency=1 scripts/test.mjs scripts/creative-loop-delivery.test.mjs scripts/creative-loop-planner.test.mjs scripts/creative-loop-roles.test.mjs scripts/metrics-media.test.mjs scripts/motion-layout-lint.test.mjs scripts/remotion-dom-trace.e2e.test.mjs scripts/remotion-canary.e2e.test.mjs scripts/role-motion-map.test.mjs scripts/shot-native-delivery.test.mjs scripts/v1-planner-visual-lock.test.mjs scripts/lean-plan.test.mjs scripts/lean-render.test.mjs scripts/prepare-creative-task.test.mjs",
     "plan:lean": "node erduo-broll-loop-engineering/scripts/lean-plan.mjs",
-    "render:lean": "node erduo-broll-loop-engineering/scripts/lean-render.mjs"
+    "render:lean": "node erduo-broll-loop-engineering/scripts/lean-render.mjs",
+    "task:creative": "node erduo-broll-loop-engineering/scripts/prepare-creative-task.mjs"
   }
 }

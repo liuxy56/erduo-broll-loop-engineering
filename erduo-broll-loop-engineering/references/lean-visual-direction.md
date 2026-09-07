@@ -1,9 +1,10 @@
 # Lean visual direction
 
-Make the meaning readable before adding style or motion. The creative owner reads
-the original SRT/design, chooses a concrete picture for each claim, then views
-the rendered result and fixes visible defects. This is a direction aid, not a
-shot template, quota, or automated taste test.
+Picture quality is the priority. The Director reads the original SRT/design and
+chooses a coherent visual world; focused creators build it, and an independent
+reviewer judges the actual result. Use this guide to make visual choices, not as
+a template, quota or automated taste test. A quick readable placeholder is not
+the final target when the brief calls for expressive motion.
 
 ## Start from the thing being discussed
 
@@ -45,6 +46,19 @@ Use five practical motion decisions rather than an animation-principle ritual:
 Avoid decorative looping backgrounds, universal spring entrances, synchronized
 starts, and a sequence of equivalent card layouts. Stillness is a valid result.
 
+## Carry the picture across the cut
+
+Make the opening state, main change and readable result concrete. Preserve a
+shared subject, its scale and framing when the next shot continues its action;
+let it transform or hand attention onward instead of automatically fading to an
+empty frame. Deliberate cuts remain valid when they serve meaning. Compare the
+actual tail and head around chapter boundaries, not only each settled frame.
+
+Use a few relevant [motion patterns](motion-patterns.md) and the optional runnable
+starter to resolve a specific action. A reference supplies a mechanism, not a
+fixed palette or layout. Match material to the subject: photographs, interfaces,
+documents, diagrams and type can all belong in one well-directed film.
+
 ## Small examples
 
 - “The founder changed the pricing page.” Show the real before/after captures
@@ -59,7 +73,8 @@ starts, and a sequence of equivalent card layouts. Stillness is a valid result.
 
 ## Review in the real output
 
-View the representative frames and moving preview. Repair concrete faults:
+Creators self-check their work; an independent reviewer views the representative
+frames and moving preview before delivery. Repair concrete faults:
 unreadable type, a missing/false source, a vague object, motion that hides the
 result, stale layers accumulating, a floating connector, empty decorative space,
 or repeated composition. Reuse a small proven motion primitive only when it

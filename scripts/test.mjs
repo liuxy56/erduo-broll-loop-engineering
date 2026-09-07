@@ -1078,7 +1078,8 @@ test('public runtime claims expose independent Builder backends and deterministi
   const checklist = await readFile(path.join(root, 'RELEASE-CHECKLIST.md'), 'utf8');
   const legacy = await readFile(path.join(root, 'erduo-broll-loop-engineering', 'references', 'legacy-production.md'), 'utf8');
   assert.match(readme, /新轻量流程先支持 HyperFrames，不自动迁移或切换后端/u);
-  assert.match(readme, /不再固定启动 Director、Assets、Lead 和多个 Builder/u);
+  assert.match(readme, /独立导演/u);
+  assert.match(readme, /独立审美/u);
   assert.match(readme, /`broll-plan\.json`/u);
   assert.match(readme, /152 张 Shotcraft 卡[^。\n]*不是 152 个已经验证的 HyperFrames 动画组件/u);
   assert.match(legacy, /production default: `hyperframes`/u);
@@ -4811,10 +4812,12 @@ test('runtime lock pins the complete HyperFrames and Skills CLI graph with integ
   assert.match(support, /`0\.9\.2`/u);
   assert.match(checklist, /`1\.0\.0`/u);
   for (const translatedReadme of translatedReadmes) {
-    assert.match(translatedReadme, /## v0\.9\.2/u);
-    assert.match(translatedReadme, /1080p[^\n]*veryfast \/ CRF 22/u);
-    assert.match(translatedReadme, /--plan[^\n]*--narrative-envelope[^\n]*--visual-system[^\n]*--contract/u);
-    assert.match(translatedReadme, /medium \/ CRF 16[^\n]*[Mm]aster/u);
+    assert.match(translatedReadme, /releases\/tag\/v1\.0\.1/u);
+    assert.match(translatedReadme, /references\/lean-production\.md/u);
+    assert.match(translatedReadme, /references\/legacy-production\.md/u);
+    assert.match(translatedReadme, /scripts\/doctor\.mjs/u);
+    assert.match(translatedReadme, /scripts\/uninstall\.mjs/u);
+    assert.match(translatedReadme, /task:creative/u);
   }
   assert.equal(packageJson.dependencies.hyperframes, '0.7.104');
   assert.equal(packageJson.dependencies.skills, SKILLS_CLI_VERSION);
@@ -5567,6 +5570,7 @@ test('public release source contains the parent plus thirteen prompt stage Skill
   );
   assert.equal(promptSurface.every((file) => (
     /\.(?:json|md|mjs|yaml)$/u.test(file)
+      || file === 'assets/motion-starter.html'
       || (/\.(?:ts|tsx)$/u.test(file)
         && file.startsWith('references/shotcraft/remotion-sources/'))
   )), true);

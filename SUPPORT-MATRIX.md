@@ -131,3 +131,17 @@ v1.0.1 已用相同 `179.866` 秒、`124` cue 输入完成全新 HyperFrames Lea
 | 双端视觉一致性 | not claimed | 两个后端分别验收；除非另有逐镜头 witness，不推断关键时间点或视觉结果一致 |
 
 来源固定为 `Vincentwei1021/video-shotcraft@41ee360d82f4c491ba9d88a24a4add7d8ff1cf8b`，library revision 为 `bdd94be16d60fa8f`。适配文本遵循 Apache-2.0，完整许可证随发布包提供；上游未来变化不会在未更新 commit、manifest 和测试的情况下静默进入本仓库。
+
+
+## Current main: quality-first creative relay
+
+The parent Skill on main uses independent Director, fresh chapter creators and
+independent visual review, with focused task files and per-shot rendering.
+Versioned v1.0.1 archives above remain historical; this source update does not
+replace their files or upgrade existing installations automatically.
+
+The 32-second Sol experiment favored Y visually and the user selected it. It did
+not establish time/token savings. The task helper prepares role-specific inputs;
+it does not automatically enforce host context isolation. The original bundled
+8-second motion starter rendered and decoded at 1920×1080/30fps with 240 frames.
+Long-film, Windows and cross-backend visual results remain outside this evidence.

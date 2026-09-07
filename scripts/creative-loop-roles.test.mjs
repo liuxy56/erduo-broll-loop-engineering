@@ -122,9 +122,10 @@ test('current public docs distinguish lean defaults from v1.0.1 history', async 
   const legacy = await readSkill('references/legacy-production.md');
   const benchmark = await readFile(path.join(repoRoot, 'docs', 'V1.0.0-BENCHMARK.md'), 'utf8');
 
-  assert.match(readme, /尚未发布的轻量流程/u);
+  assert.match(readme, /质量优先的角色接力流程/u);
   assert.match(readme, /`broll-plan\.json`/u);
-  assert.match(readme, /不再固定启动 Director、Assets、Lead 和多个 Builder/u);
+  assert.match(readme, /独立导演/u);
+  assert.match(readme, /独立审美/u);
   assert.match(readme, /v1\.0\.1 兼容流程/u);
   assert.match(readme, /179\.866/u);
   assert.match(readme, /242\.05/u);
